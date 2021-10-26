@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zuTao_01">
+
+
+
+
+
+
+
+<title>指针的理解/一些小程序 | THIS IS ZUTAO</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Roboto+Mono&display=swap');
+</style>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/frame.js"></script>
+    
+
+
+
+
+
+
+
+  <meta name="generator" content="Hexo 5.4.0"></head>
+  <body>
+    <div class="mask-border">
+    </div>
+
+    <div class="wrapper">
+
+      <div class="header">
+  <div class="flex-container">
+    <div class="header-inner">
+      <div class="site-brand-container">
+        <a href="/">zuTao.</a>
+      </div>
+      <div id="menu-btn" class="menu-btn" onclick="toggleMenu()">
+        Menu
+      </div>
+      <nav class="site-nav">
+        <ul class="menu-list">
+          
+            
+              <li class="menu-item">
+                <a href="/">Home</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/archives/">Archive</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/categories/gallery/">Gallery</a>
+              </li> 
+                   
+          
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main">
+        <div class="flex-container">
+          <article id="post">
+
+  
+    <div class="post-head">
+    <div class="post-info">
+        <div class="tag-list">
+            
+                
+                    <span class="post-tag">
+                        <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                            笔记
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/C/">
+                            C++
+                        </a>
+                    </span>    
+                           
+            
+        </div>
+        <div class="post-title">
+            
+            
+                指针的理解/一些小程序
+            
+            
+        </div>
+        <span class="post-date">
+            9月 12, 2021
+        </span>
+    </div>
+    <div class="post-img">
+        
+            <div class="h-line-primary"></div>
+              
+    </div>
+</div>
+    <div class="post-content">
+    <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>; <span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span>* p; <span class="comment">//这里的*是定义  p是指针变量名</span></span><br><span class="line">*p <span class="comment">//* 解引用</span></span><br><span class="line">    </span><br><span class="line">p = &amp;a ;  <span class="comment">//p是地址，&amp;a是a的地址</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* p = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(<span class="number">10</span>);</span><br><span class="line">	<span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* p = <span class="built_in">func</span>();</span><br><span class="line">    cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">delete</span> p; <span class="comment">//就和 &quot;*p&quot; &quot;*解引用&quot; 展示的是指针p指向的地址的内容类似</span></span><br><span class="line">    		  <span class="comment">//delete p 删除的是指针p所指向的地址的内容</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123; </span><br><span class="line"><span class="keyword">int</span>&amp; ref = <span class="number">10</span>; <span class="comment">//没有提前创建内存空间</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; ref = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">//创建了一块没有名字的内存空间 值为10</span></span><br><span class="line">    <span class="comment">//且创建了引用ref 指向10的地址              </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">////</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//冒泡函数</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> zu[] = &#123;<span class="number">8</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">8</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">66</span>,<span class="number">25</span>,<span class="number">6754</span>,<span class="number">52</span>,<span class="number">65</span>,<span class="number">23</span>,<span class="number">86</span>,<span class="number">245</span>,<span class="number">88</span>,<span class="number">324324</span>,<span class="number">754</span>,<span class="number">434</span>,<span class="number">17</span>,<span class="number">4</span>,<span class="number">56</span>,<span class="number">73</span>,<span class="number">1</span>&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> a = <span class="number">0</span>; a &lt; <span class="keyword">sizeof</span> zu / <span class="keyword">sizeof</span> zu[<span class="number">0</span>] - <span class="number">1</span>; a++)&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="keyword">sizeof</span> zu / <span class="keyword">sizeof</span> zu[<span class="number">0</span>] - <span class="number">1</span> - a; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (zu[j] &gt; zu[j + <span class="number">1</span>])</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> tem = <span class="number">0</span>;</span><br><span class="line">				tem = zu[j];</span><br><span class="line">				zu[j] = zu[j + <span class="number">1</span>];</span><br><span class="line">				zu[j + <span class="number">1</span>] = tem;	</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span> zu / <span class="keyword">sizeof</span> zu[<span class="number">0</span>]; i++) <span class="comment">//以上for循环 第二空&quot;&lt;=&quot; 会报错 c6201</span></span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; zu[i] &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//99乘法表</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	<span class="keyword">int</span> b;</span><br><span class="line">	<span class="keyword">for</span> (a = <span class="number">1</span>;a &lt; <span class="number">10</span>;a++)&#123;		</span><br><span class="line">		<span class="keyword">for</span> (b = <span class="number">1</span>; b &lt;=a; b++)&#123;</span><br><span class="line">			cout &lt;&lt; a &lt;&lt; <span class="string">&quot;*&quot;</span> &lt;&lt; b &lt;&lt; <span class="string">&quot;=&quot;</span> &lt;&lt; a * b &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">		&#125;cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  <span class="comment">//三目运算符 选择结构    swith-if-sanmu</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">1</span>; <span class="keyword">int</span> r = <span class="number">67</span>; <span class="keyword">int</span> c = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	c =( a =r ? <span class="literal">true</span> : <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; c&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//猜数字大小</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> r = <span class="built_in">rand</span>() % <span class="number">100</span>;</span><br><span class="line">	r= <span class="built_in">rand</span> () % <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">	cin &gt;&gt; a;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> ts = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (a != r)&#123;</span><br><span class="line">		ts++;</span><br><span class="line">		<span class="keyword">if</span> (ts == <span class="number">8</span>)&#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;done &quot;</span> &lt;&lt; endl;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;<span class="keyword">if</span> (a &lt; r)&#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;small&quot;</span> &lt;&lt; endl;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;big&quot;</span> &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">		cin &gt;&gt; a;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt;<span class="string">&quot;a=&quot;</span>&lt;&lt; a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;r=&quot;</span>&lt;&lt;r &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;ts=&quot;</span>&lt;&lt;ts &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (a == r)&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;right&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;false&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">student</span> &#123;</span></span><br><span class="line">		string name;</span><br><span class="line">		<span class="keyword">int</span> age;</span><br><span class="line">		<span class="keyword">int</span> score;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">student</span> <span class="title">arr</span>[3] =</span></span><br><span class="line">	&#123;</span><br><span class="line">		&#123;<span class="string">&quot;zhangsan&quot;</span>, <span class="number">11</span>,<span class="number">100</span>&#125;,</span><br><span class="line">		&#123;<span class="string">&quot;lisi&quot;</span>,<span class="number">12</span>,<span class="number">19</span>&#125;,</span><br><span class="line">		&#123;<span class="string">&quot;wangwu&quot;</span>, <span class="number">12</span>, <span class="number">22</span>&#125;<span class="comment">//&quot;，&quot;	</span></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	arr[<span class="number">2</span>].age = <span class="number">21</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;name = &quot;</span> &lt;&lt; arr[i].name&lt;&lt;<span class="string">&quot;\t&quot;</span></span><br><span class="line">			&lt;&lt; <span class="string">&quot;age = &quot;</span> &lt;&lt; arr[i].age&lt;&lt;<span class="string">&quot;  &quot;</span></span><br><span class="line">			&lt;&lt; <span class="string">&quot;score = &quot;</span> &lt;&lt; arr[i].score&lt;&lt;<span class="string">&quot;\t&quot;</span></span><br><span class="line">			&lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//分类</span></span><br><span class="line"><span class="comment">//有参 无参</span></span><br><span class="line"><span class="comment">//普通 拷贝</span></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//构造函数</span></span><br><span class="line">	<span class="built_in">Person</span>()<span class="comment">//无参/默认构造</span></span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Person的构造函数的调用&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">Person</span>(<span class="keyword">int</span> a)<span class="comment">//有参</span></span><br><span class="line">	&#123;</span><br><span class="line">		age = a;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Person的有参构造函数的调用&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//拷贝构造函数;</span></span><br><span class="line">	<span class="built_in">Person</span>(<span class="keyword">const</span> Person&amp; p)<span class="comment">//  常量 引用</span></span><br><span class="line">	&#123;	</span><br><span class="line">		age = p.age;</span><br><span class="line">		</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Person的拷贝构造函数调用&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	~<span class="built_in">Person</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Person的析构函数的调用&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//括号法</span></span><br><span class="line">	<span class="comment">//Person p;  //不要加括号;</span></span><br><span class="line">	<span class="comment">//Person p2(10);</span></span><br><span class="line">	<span class="comment">//Person p3(p2);</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//cout &lt;&lt; &quot;p2的的年龄为：  &quot; &lt;&lt; p2.age &lt;&lt; endl;</span></span><br><span class="line">	<span class="comment">//cout &lt;&lt; &quot;p3的的年龄为：  &quot; &lt;&lt; p3.age &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//显示法</span></span><br><span class="line">	Person p1;</span><br><span class="line">	Person p2 = <span class="built_in">Person</span>(<span class="number">10</span>);</span><br><span class="line">	Person p3 = <span class="built_in">Person</span>(p2);</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//隐式转换法</span></span><br><span class="line">	Person p4 = <span class="number">10</span>;</span><br><span class="line">	Person p5 = p4;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	<span class="built_in">test01</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</div> 
+
+<script>
+    window.onload = detectors();
+</script>
+    <div class="post-footer">
+    <div class="h-line-primary"></div>
+    <nav class="post-nav">
+        <div class="prev-item">
+           
+                <div class="icon arrow-left"></div>
+                <div class="post-link">
+                    <a href="/2021/09/15/note002/">Prev</a>
+                </div>
+            
+        </div>
+        <div class="next-item">
+            
+                <div class="icon arrow-right"></div>
+                <div class="post-link">
+                  <a href="/2021/09/07/gallery002/">Next</a>  
+                </div>  
+            
+        </div>
+    </nav>
+</div>
+
+  
+</article>
+        </div>
+      </div>
+      
+      <div class="footer">
+    <div class="flex-container">
+        <div class="footer-text">
+            
+                For the soul is dead that slumbers.
+                <br>
+            
+            
+                
+        </div>
+    </div>
+</div>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+<span id="busuanzi_container_site_pv">
+-view<span id="busuanzi_value_site_pv"></span>times
+</span>
+
+    </div>
+
+  </body>
+</html>
