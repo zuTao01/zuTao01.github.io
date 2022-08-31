@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="zuTao_01">
+
+
+
+
+
+
+
+<title>南艺每日健康打卡的自动化 | ZUTAO</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Roboto+Mono&display=swap');
+</style>
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/frame.js"></script>
+    
+
+
+
+
+
+
+
+  <meta name="generator" content="Hexo 5.4.0"></head>
+  <body>
+    <div class="mask-border">
+    </div>
+
+    <div class="wrapper">
+
+      <div class="header">
+  <div class="flex-container">
+    <div class="header-inner">
+      <div class="site-brand-container">
+        <a href="/">zuTao.</a>
+      </div>
+      <div id="menu-btn" class="menu-btn" onclick="toggleMenu()">
+        Menu
+      </div>
+      <nav class="site-nav">
+        <ul class="menu-list">
+          
+            
+              <li class="menu-item">
+                <a href="/">Home</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/archives/">Archive</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/categories/gallery/">Gallery</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/2022/07/14/done/">DONE</a>
+              </li> 
+                   
+          
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main">
+        <div class="flex-container">
+          <article id="post">
+
+  
+    <div class="post-head">
+    <div class="post-info">
+        <div class="tag-list">
+            
+                
+                    <span class="post-tag">
+                        <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                            笔记
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/python/">
+                            python
+                        </a>
+                    </span>    
+                           
+            
+        </div>
+        <div class="post-title">
+            
+            
+                南艺每日健康打卡的自动化
+            
+            
+        </div>
+        <span class="post-date">
+            8月 31, 2022
+        </span>
+    </div>
+    <div class="post-img">
+        
+            <div class="h-line-primary"></div>
+              
+    </div>
+</div>
+    <div class="post-content">
+    <p>[TOC]</p>
+<h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、<strong>概述</strong></h2><p>​        利用<strong>python</strong>（编程语言）<strong>驱动selenium</strong>（python的一个库用于驱动浏览器）完成每日自动化打卡，并打包成exe文件。</p>
+<p>​        并利用windows<strong>任务计划程序</strong>定时启动exe文件，或租用云电脑搭建环境定时启动。</p>
+<h2 id="二、步骤"><a href="#二、步骤" class="headerlink" title="二、步骤"></a>二、<strong>步骤</strong></h2><h3 id="1-搭建python编程环境。"><a href="#1-搭建python编程环境。" class="headerlink" title="1.搭建python编程环境。"></a>1.搭建python编程环境。</h3><iframe src="//player.bilibili.com/player.html?aid=726439974&bvid=BV1pS4y1b7NA&cid=716671061&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+<p>个人推荐python + vscode。</p>
+<h3 id="2-安装selenium和浏览器驱动。"><a href="#2-安装selenium和浏览器驱动。" class="headerlink" title="2.安装selenium和浏览器驱动。"></a>2.安装selenium和浏览器驱动。</h3><iframe src="//player.bilibili.com/player.html?aid=64421994&bvid=BV1Z4411o7TA&cid=516850435&page=1" scrolling="0" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+<p><a href="www.byhy.net">结合网站学习</a>，在selenium库中只需浅浅地学习<strong>打开网页，定位网页元素、元素的点击和输入文本4个功能</strong>即可完成本次项目。</p>
+<h3 id="3-分析目标网站和编写代码。"><a href="#3-分析目标网站和编写代码。" class="headerlink" title="3.分析目标网站和编写代码。"></a>3.分析目标网站和<strong>编写代码</strong>。</h3><p>南艺每日健康打卡网页分为两大部分，一是登录部分，一是选择填写部分。</p>
+<p><strong>其中有个坑就是两个网页的跳转中，无论你的网速有多快，在跳转过程中仍然需要停顿，直接跳转接定位是定位不到的，加上time.sleep()即可。这个坑坑我了好久，切记！</strong></p>
+<hr>
+<h4 id="第一版源码"><a href="#第一版源码" class="headerlink" title="第一版源码"></a><strong>第一版源码</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line"></span><br><span class="line">driver.get(<span class="string">&#x27;https://yqtb.nua.edu.cn/mp-czzx/webs/yqsb/sjhmcj/index.html&#x27;</span>)	<span class="comment">#打开网页</span></span><br><span class="line"></span><br><span class="line">nua_account = driver.find_element(By.ID,<span class="string">&#x27;userId&#x27;</span>)</span><br><span class="line">nua_account.send_keys(<span class="string">&#x27;**********&#x27;</span>)</span><br><span class="line"></span><br><span class="line">nua_password = driver.find_element(By.ID,<span class="string">&#x27;pwd&#x27;</span>)					<span class="comment">#定位位置			</span></span><br><span class="line">nua_password.send_keys(<span class="string">&#x27;******&#x27;</span>)								<span class="comment">#输入账户密码</span></span><br><span class="line"></span><br><span class="line">nua_click = driver.find_element(By.ID,<span class="string">&#x27;qdtj_btn&#x27;</span>)				<span class="comment">#定位登录按钮并点击</span></span><br><span class="line">nua_click.click()											</span><br><span class="line"></span><br><span class="line">time.sleep(<span class="number">1</span>)        <span class="comment">#跳转中的停顿                          </span></span><br><span class="line"></span><br><span class="line">radio1 = driver.find_element(By.XPATH,<span class="string">&#x27;/html/body/div[1]/div[4]/div[4]/div/div/div/div/div/div[1]/label&#x27;</span>)</span><br><span class="line">radio1.click()</span><br><span class="line"></span><br><span class="line">radio2 = driver.find_element(By.XPATH,<span class="string">&#x27;/html/body/div[1]/div[4]/div[7]/div/div/div/div/div/div[1]/label&#x27;</span>)</span><br><span class="line">radio2.click()</span><br><span class="line"></span><br><span class="line">radio3 = driver.find_element(By.XPATH,<span class="string">&#x27;/html/body/div[1]/div[4]/div[14]/div/div/div/div/div/div[1]/label&#x27;</span>)</span><br><span class="line">radio3.click()</span><br><span class="line"></span><br><span class="line">radio4 = driver.find_element(By.XPATH,<span class="string">&#x27;/html/body/div[1]/div[4]/label&#x27;</span>)</span><br><span class="line">radio4.click()</span><br><span class="line"></span><br><span class="line">radio5 = driver.find_element(By.XPATH,<span class="string">&#x27;//*[@id=&quot;wyyd&quot;]&#x27;</span>) 			<span class="comment">#依次点击内容和最后提交</span></span><br><span class="line">radio5.click()														<span class="comment">#代码完成</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="优化后的源码"><a href="#优化后的源码" class="headerlink" title="优化后的源码"></a><strong>优化后的源码</strong></h4><p>​        将各个功能函数化，集合成功能块最后按照账号来引用，代码很优美，太美了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f_c</span>(<span class="params">xpath</span>):</span></span><br><span class="line">    a = driver.find_element(By.XPATH,xpath).click()            <span class="comment">#创建函数：定位并点击，xpath是定位位置</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f_s</span>(<span class="params">xpath,b</span>):</span></span><br><span class="line">    a = driver.find_element(By.XPATH,xpath).send_keys(b)        <span class="comment">#创建函数：定位并输入，b是文本内容</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fullProcess</span>(<span class="params">name,psw</span>):</span>      <span class="comment">#函数全流程，name是用户名，psw是密码</span></span><br><span class="line">    driver.get(<span class="string">&#x27;https://yqtb.nua.edu.cn/mp-czzx/webs/yqsb/sjhmcj/index.html&#x27;</span>)   </span><br><span class="line">    f_s(<span class="string">&#x27;//*[@id=&quot;userId&quot;]&#x27;</span>,name)</span><br><span class="line">    f_s(<span class="string">&#x27;//*[@id=&quot;pwd&quot;]&#x27;</span>,psw)</span><br><span class="line">    f_c(<span class="string">&#x27;//*[@id=&quot;qdtj_btn&quot;]&#x27;</span>)</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    f_c(<span class="string">&#x27;/html/body/div[1]/div[4]/div[4]/div/div/div/div/div/div[1]/label&#x27;</span>)</span><br><span class="line">    f_c(<span class="string">&#x27;/html/body/div[1]/div[4]/div[7]/div/div/div/div/div/div[1]/label&#x27;</span>)</span><br><span class="line">    f_c(<span class="string">&#x27;/html/body/div[1]/div[4]/div[14]/div/div/div/div/div/div[1]/label&#x27;</span>)</span><br><span class="line">    f_c(<span class="string">&#x27;/html/body/div[1]/div[4]/label&#x27;</span>)</span><br><span class="line">    f_c(<span class="string">&#x27;//*[@id=&quot;wyyd&quot;]&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sec_jud</span>(<span class="params">a,b</span>):</span>           <span class="comment">#二次判断是否签到成功</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fullProcess(a,b)</span><br><span class="line">        <span class="built_in">print</span>(a,<span class="string">&quot;签到成功&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;!&#x27;</span>,a,<span class="string">&#x27;签到失败&#x27;</span>)</span><br><span class="line"></span><br><span class="line">sec_jud(<span class="string">&#x27;B2001*****&#x27;</span>,<span class="string">&#x27;******&#x27;</span>)  <span class="comment">#同学a的账号密码</span></span><br><span class="line">sec_jud(<span class="string">&#x27;B2001*****&#x27;</span>,<span class="string">&#x27;******&#x27;</span>)	<span class="comment">#同学b的账号密码</span></span><br><span class="line">sec_jud(<span class="string">&#x27;B2001*****&#x27;</span>,<span class="string">&#x27;******&#x27;</span>)	<span class="comment">#同学c的账号密码</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-打包程序。"><a href="#4-打包程序。" class="headerlink" title="4.打包程序。"></a>4.打包程序。</h3><p>​        使用pyinstaller将程序打包成exe文件。</p>
+<iframe src="//player.bilibili.com/player.html?aid=553155882&bvid=BV15i4y1U7F7&cid=574798493&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+<h3 id="5-将程序加入windows任务计划程序。"><a href="#5-将程序加入windows任务计划程序。" class="headerlink" title="5.将程序加入windows任务计划程序。"></a>5.将程序加入windows任务计划程序。</h3><iframe src="//player.bilibili.com/player.html?aid=727164077&bvid=BV1tS4y1B7eM&cid=736097586&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+</div> 
+
+<script>
+    window.onload = detectors();
+</script>
+    <div class="post-footer">
+    <div class="h-line-primary"></div>
+    <nav class="post-nav">
+        <div class="prev-item">
+           
+        </div>
+        <div class="next-item">
+            
+                <div class="icon arrow-right"></div>
+                <div class="post-link">
+                  <a href="/2022/07/24/note003/">Next</a>  
+                </div>  
+            
+        </div>
+    </nav>
+</div>
+
+  
+</article>
+        </div>
+      </div>
+      
+      <div class="footer">
+    <div class="flex-container">
+        <div class="footer-text">
+            
+                For the soul is dead that slumbers.
+                <br>
+            
+            
+                
+        </div>
+    </div>
+</div>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+<span id="busuanzi_container_site_pv">
+-view<span id="busuanzi_value_site_pv"></span>times
+</span>
+
+    </div>
+
+  </body>
+</html>
